@@ -18,5 +18,5 @@ public class CategoryEntity {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    private String category;
+    private Long category;
 }

@@ -27,6 +27,25 @@
 </nav>
 
 <div class="container">
+<!--  alert de success-->
+  <div class="mt-2 alert alert-success row justify-content-between" role="alert" id="alert-success" hidden>
+    <div class="mt-2 col">
+      <p style="display: inline;">El justificativo se ingreso correctamente :D </p>
+    </div>
+    <div class="col-1 mt-1">
+      <button type="button" class="btn btn-success my-0" id="btnAlert-success">Close</button>
+    </div>
+  </div>
+<!--  alert de rechazo-->
+  <div class="mt-2 alert alert-warning row justify-content-between" role="alert" id="alert" hidden>
+    <div class="mt-2 col">
+      <p style="display: inline;">Hubo un problema con el justificativo, intentalo nuevamente</p>
+    </div>
+    <div class="col-1 mt-1">
+      <button type="button" class="btn btn-warning my-0" id="btnAlert">Close</button>
+    </div>
+  </div>
+
   <div class="mt-1 mb-0 px-5 py-3 col-4">
     <label class="form-label ps-1"> Tipo de justiticativo</label>
     <select class="form-select" aria-label="Default select example" id="type-justifive">
@@ -45,7 +64,7 @@
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Fecha</label>
-        <input type="date" class="form-control" id="date-justificativo">
+        <input type="date" class="form-control" id="date-retrasos">
         <div id="date-retrasos" class="form-text">Ingrese la fecha del día de atraso</div>
       </div>
       <button id="button-retrasos" class="btn btn-primary">Crear</button>
@@ -90,16 +109,59 @@
     }
 
     document.getElementById("button-horas-extras").addEventListener("click",()=>{
-      let rut = document.getElementById("rut-horas-extras").value;
-      let date = document.getElementById("date-horas-extras").value;
-      let amount = document.getElementById("amount-horas-extras").value;
-      console.log(rut);
-      console.log(date);
-      console.log(amount);
+      let rutValue = document.getElementById("rut-horas-extras").value;
+      let dateValue = document.getElementById("date-horas-extras").value;
+      let amountValue = document.getElementById("amount-horas-extras").value;
+      axios.post("http://localhost:8090/"+"1/"+rutValue,
+              {
+                "date" : dateValue,
+                "amount" : amountValue
+              }
+      ).then(response => {
+        if(response.data == 1){
+          document.getElementById("alert").removeAttribute("hidden");
+          document.getElementById("alert-success").setAttribute("hidden",true);
+        }else{
+          document.getElementById("alert-success").removeAttribute("hidden");
+          document.getElementById("alert").setAttribute("hidden",true);
+          document.getElementById("rut-horas-extras").value = "";
+          document.getElementById("date-horas-extras").value = "";
+          document.getElementById("amount-horas-extras").value = "";
+        }
+      }).catch(error => {
+        document.getElementById("alert").removeAttribute("hidden");
+      })
+    })
+
+    document.getElementById("button-retrasos").addEventListener("click",()=>{
+      let rutValue = document.getElementById("rut-retrasos").value;
+      let dateValue = document.getElementById("date-retrasos").value;
+      axios.post("http://localhost:8090/"+"0/"+rutValue,
+              {
+                "date" : dateValue,
+              }
+      ).then(response => {
+        console.log("Se ejecuto correctamente");
+        if(response.data == 1){
+          document.getElementById("alert").removeAttribute("hidden");
+          document.getElementById("alert-success").setAttribute("hidden",true);
+        }else{
+          document.getElementById("alert-success").removeAttribute("hidden");
+          document.getElementById("alert").setAttribute("hidden",true);
+          document.getElementById("rut-retrasos").value = "";
+          document.getElementById("date-retrasos").value = "";
+        }
+      }).catch(error => {
+        document.getElementById("alert").removeAttribute("hidden");
+      })
     })
   })
 
+  document.getElementById("btnAlert").addEventListener("click",() =>{
+    document.getElementById("alert").setAttribute("hidden",true);
+  })
 
-
-
+  document.getElementById("btnAlert-success").addEventListener("click",() =>{
+    document.getElementById("alert-success").setAttribute("hidden",true);
+  })
 </script>
