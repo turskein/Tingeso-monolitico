@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Try</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<nav class="ps-4 navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Tingeso :D</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/upload-data">Cargar Marcaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/upload-justifive">Cargar Justificativos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="mt-1 mb-0 px-5 py-3 col-4">
+    <label class="form-label ps-1"> Tipo de justiticativo</label>
+    <select class="form-select" aria-label="Default select example" id="type-justifive">
+      <option selected value="0">Seleccionar tipo de justificativo</option>
+      <option value="1">Horas extras</option>
+      <option value="2">Atrasos y Faltas</option>
+    </select>
+  </div>
+
+  <!--Justificativo de atraso-->
+  <div id="div-justificativo-falta" class="px-5" hidden>
+    <h3>Justificativo de atraso</h3>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Rut</label>
+        <input placeholder="Ingrese el rut del empleado" type="text" class="form-control" id="rut-retrasos" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="date-justificativo">
+        <div id="date-retrasos" class="form-text">Ingrese la fecha del día de atraso</div>
+      </div>
+      <button id="button-retrasos" class="btn btn-primary">Crear</button>
+  </div>
+
+  <!--Justificativo de Horas extras-->
+  <div id="div-justificativo-horas-extras" class="px-5" hidden>
+    <h3>Justificativo de horas extras</h3>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Rut</label>
+        <input id="rut-horas-extras" placeholder="Ingrese el rut del empleado" type="text" class="form-control" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="date-horas-extras">
+        <div id="date-horas-extras" class="form-text">Ingrese la fecha del día</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Cantidad de horas</label>
+        <input type="number" class="form-control" id="amount-horas-extras">
+      </div>
+      <button id="button-horas-extras" class="btn btn-primary">Crear</button>
+  </div>
+</div>
+</body>
+</html>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+  document.getElementById("type-justifive").addEventListener("change",()=>{
+    let valorSeleccionado = document.getElementById("type-justifive").value;
+    if(valorSeleccionado == "0"){
+      document.getElementById("div-justificativo-falta").setAttribute("hidden",true);
+      document.getElementById("div-justificativo-horas-extras").setAttribute("hidden",true);
+    }else if (valorSeleccionado == "1"){
+      document.getElementById("div-justificativo-falta").setAttribute("hidden",true);
+      document.getElementById("div-justificativo-horas-extras").removeAttribute("hidden");
+    }else if(valorSeleccionado == "2"){
+      document.getElementById("div-justificativo-falta").removeAttribute("hidden");
+      document.getElementById("div-justificativo-horas-extras").setAttribute("hidden",true);
+    }
+
+    document.getElementById("button-horas-extras").addEventListener("click",()=>{
+      let rut = document.getElementById("rut-horas-extras").value;
+      let date = document.getElementById("date-horas-extras").value;
+      let amount = document.getElementById("amount-horas-extras").value;
+      console.log(rut);
+      console.log(date);
+      console.log(amount);
+    })
+  })
+
+
+
+
+</script>
