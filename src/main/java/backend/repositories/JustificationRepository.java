@@ -15,5 +15,5 @@ public interface JustificationRepository extends CrudRepository<JustificationEnt
             value = "SELECT * FROM justification WHERE id_staff = ?1 AND date =?2",
             nativeQuery = true
     )
-    public List<JustificationEntity> findById_staffAndDate(Long Id, Date date);
+    public List<JustificationEntity> findByIdStaffAndDate(Long id, Date date);
 }

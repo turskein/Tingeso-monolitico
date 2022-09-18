@@ -1,12 +1,10 @@
-package backend.services.salary.ExtraSalary;
+package backend.services.salary.extraSalary;
 
-import backend.entities.CategoryEntity;
 import backend.entities.StaffEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 

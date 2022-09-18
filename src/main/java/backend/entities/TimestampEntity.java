@@ -1,10 +1,6 @@
 package backend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -20,14 +16,14 @@ public class TimestampEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false,name = "id_timestamp")
     @Getter
-    private Long id_timestamp;
+    private Long idTimestamp;
 
     @Getter
     @Setter
     @Column(name = "id_staff")
-    private Long id_staff;
+    private Long idStaff;
 
     @Getter
     @Setter

@@ -17,15 +17,14 @@ public class UploadExtraHoursService {
 
     private Long getIdByRut(String rut){
         try {
-            return staffRepository.findByRut(rut).get(0).getId_staff();
+            return staffRepository.findByRut(rut).get(0).getIdStaff();
         }catch (Exception e){
-            System.out.println(e);
             return Integer.toUnsignedLong(0);
         }
     }
 
     private void saveJustification(Long id, ExtraHoursEntity extraHoursEntity){
-        extraHoursEntity.setId_staff(id);
+        extraHoursEntity.setIdStaff(id);
         extraHoursRepository.save(extraHoursEntity);
     }
 

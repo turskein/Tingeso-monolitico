@@ -3,11 +3,10 @@ package backend.services.salary;
 import backend.entities.CategoryEntity;
 import backend.entities.StaffEntity;
 import backend.repositories.CategoryRepository;
-import backend.services.salary.Discounts.ApplyDscts;
-import backend.services.salary.Discounts.Cotizations;
-import backend.services.salary.Discounts.DescByDelaySalary;
-import backend.services.salary.ExtraSalary.Bonifications;
-import backend.services.salary.ExtraSalary.ExtraHours;
+import backend.services.salary.discounts.ApplyDscts;
+import backend.services.salary.discounts.Cotizations;
+import backend.services.salary.extraSalary.Bonifications;
+import backend.services.salary.extraSalary.ExtraHours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class GetSalaryByOneStaff {
     Cotizations cotizations;
 
     private CategoryEntity getCategory(StaffEntity worker){
-        long idCategory = worker.getId_category();
+        long idCategory = worker.getIdCategory();
         return categoryRepository.findAllById(idCategory).get(0);
     }
 

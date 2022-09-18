@@ -1,4 +1,4 @@
-package backend.services.salary.Discounts;
+package backend.services.salary.discounts;
 
 import backend.entities.StaffEntity;
 import backend.entities.TimestampEntity;
@@ -7,7 +7,6 @@ import backend.repositories.TimeStampRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,13 +40,13 @@ public class ApplyDscts {
         /*Iterations over day of month*/
         for (Date current = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), current = start.getTime()) {
             if(missingDay.isWorkableDay(current)){
-                List<TimestampEntity> currentTimestamps = timeStampRepository.findById_staffAndDate(worker.getId_staff(),current);
+                List<TimestampEntity> currentTimestamps = timeStampRepository.findByIdStaffAndDate(worker.getIdStaff(),current);
                 if(missingDay.isMissingDay(currentTimestamps)){
                     dsctos = dsctos + missingDay.noWorkedDay;
                 }else{
                     TimestampEntity currentTimestamp = currentTimestamps.get(0);
                     if(descByDelaySalary.overSeventy(currentTimestamp)){
-                        if(currentTimestamps.size() > 0){
+                        if(!currentTimestamps.isEmpty()){
                         }else {
                             dsctos = dsctos + missingDay.noWorkedDay;
                         }

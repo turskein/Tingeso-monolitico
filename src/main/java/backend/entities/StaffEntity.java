@@ -1,10 +1,6 @@
 package backend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,9 +15,9 @@ public class StaffEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false,name = "id_staff")
     @Getter
-    private Long id_staff;
+    private Long idStaff;
 
     @Setter
     @Column(name = "rut")
@@ -43,7 +39,7 @@ public class StaffEntity {
 
     @Setter
     @Column(name = "id_category")
-    private Long id_category;
+    private Long idCategory;
 
     @Setter
     @Temporal(TemporalType.DATE)

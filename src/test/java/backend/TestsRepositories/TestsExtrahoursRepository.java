@@ -17,7 +17,7 @@ public class TestsExtrahoursRepository {
     @Test
     void findAllById_staffAndMonthAndYear(){
         Long id = Integer.toUnsignedLong(1);
-        List<ExtraHoursEntity> extraHoursEntities = extraHoursRepository.findAllById_staffAndMonthAndYear(id,9,2022);
+        List<ExtraHoursEntity> extraHoursEntities = extraHoursRepository.findAllByIdStaffAndMonthAndYear(id,9,2022);
         System.out.println("======================");
         for (ExtraHoursEntity oneExtraHour: extraHoursEntities){
             System.out.println(oneExtraHour);

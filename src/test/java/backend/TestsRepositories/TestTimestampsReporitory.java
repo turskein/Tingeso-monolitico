@@ -29,7 +29,7 @@ public class TestTimestampsReporitory {
             Long id = Integer.toUnsignedLong(1);
 
             theDate = simpleDateFormatForDate.parse("2022-08-01");
-            List<TimestampEntity> timestampEntities = timeStampRepository.findById_staffAndDate(id,theDate);
+            List<TimestampEntity> timestampEntities = timeStampRepository.findByIdStaffAndDate(id,theDate);
 
             for (TimestampEntity timestamp: timestampEntities){
                 System.out.println(timestamp);

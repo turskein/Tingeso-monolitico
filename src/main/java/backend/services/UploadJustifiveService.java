@@ -20,20 +20,18 @@ public class UploadJustifiveService {
 
     private Long getIdByRut(String rut){
         try {
-            return staffRepository.findByRut(rut).get(0).getId_staff();
+            return staffRepository.findByRut(rut).get(0).getIdStaff();
         }catch (Exception e){
-            System.out.println(e);
             return Integer.toUnsignedLong(0);
         }
     }
 
     private int saveJustification(Long id, JustificationEntity justificationEntity){
-        justificationEntity.setId_staff(id);
+        justificationEntity.setIdStaff(id);
         try{
             justificationRepository.save(justificationEntity);
             return 0;
         }catch (Exception e){
-            System.out.println(e);
             return 1;
         }
 

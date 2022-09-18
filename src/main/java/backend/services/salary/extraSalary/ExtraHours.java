@@ -1,4 +1,4 @@
-package backend.services.salary.ExtraSalary;
+package backend.services.salary.extraSalary;
 
 
 import backend.entities.CategoryEntity;
@@ -31,17 +31,24 @@ public class ExtraHours {
     SalaryByCategory salaryByCategory;
 
     private List<ExtraHoursEntity> getExtraHoursByStaffAndDate(StaffEntity worker, int month, int year){
-        return extraHoursRepository.findAllById_staffAndMonthAndYear(worker.getId_staff(),month,year);
+        return extraHoursRepository.findAllByIdStaffAndMonthAndYear(worker.getIdStaff(),month,year);
     }
 
     private TimestampEntity getTimeStampByWorkerAndDate(StaffEntity worker, Date date){
         try{
-            return timeStampRepository.findById_staffAndDate(worker.getId_staff(),date).get(1);
+            return timeStampRepository.findByIdStaffAndDate(worker.getIdStaff(),date).get(1);
         }catch (Exception e){
-            System.out.println(e);
             return null;
         }
 
+    }
+
+    public Time getTimeFromTimestamp(TimestampEntity timestamp){
+        try{
+            return timestamp.getTime();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     private Time lessOneHour(Time time){
@@ -62,7 +69,9 @@ public class ExtraHours {
         if(thereAreTimeStamp(timeStampOfDayExtraHours)){
             return 0;
         }
-        Time timeOfTimeStamp = timeStampOfDayExtraHours.getTime();
+
+        Time timeOfTimeStamp = getTimeFromTimestamp(timeStampOfDayExtraHours);
+
         Time lessedTime = lessOneHour(timeOfTimeStamp);
 
         int validateExtraHours = 0;

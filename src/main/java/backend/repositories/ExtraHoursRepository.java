@@ -14,5 +14,5 @@ public interface ExtraHoursRepository extends CrudRepository<ExtraHoursEntity, L
             value = "SELECT * FROM extra_hours WHERE id_staff = ?1 AND EXTRACT(MONTH FROM date) = ?2 AND EXTRACT(YEAR FROM date) = ?3",
             nativeQuery = true
     )
-    List<ExtraHoursEntity> findAllById_staffAndMonthAndYear(Long id_staff, int month, int year);
+    List<ExtraHoursEntity> findAllByIdStaffAndMonthAndYear(Long idStaff, int month, int year);
 }

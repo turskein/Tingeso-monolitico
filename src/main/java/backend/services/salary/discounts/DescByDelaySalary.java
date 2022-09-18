@@ -1,6 +1,5 @@
-package backend.services.salary.Discounts;
+package backend.services.salary.discounts;
 
-import backend.entities.JustificationEntity;
 import backend.entities.TimestampEntity;
 import backend.repositories.JustificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

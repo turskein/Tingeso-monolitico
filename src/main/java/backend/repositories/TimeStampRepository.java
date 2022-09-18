@@ -15,6 +15,6 @@ public interface TimeStampRepository extends CrudRepository<TimestampEntity, Lon
             value = "SELECT * FROM timestamp WHERE id_staff = ?1 AND date =?2 ORDER BY time ASC",
             nativeQuery = true
     )
-    List<TimestampEntity> findById_staffAndDate(Long id_staff, Date date);
+    List<TimestampEntity> findByIdStaffAndDate(Long idStaff, Date date);
 
 }

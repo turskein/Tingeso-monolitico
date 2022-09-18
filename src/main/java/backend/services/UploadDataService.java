@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service
 public class UploadDataService {
@@ -36,7 +37,6 @@ public class UploadDataService {
         try{
             return simpleDateFormatForDate.parse(str);
         }catch(ParseException e){
-            System.out.println(e);
             return null;
         }
     }
@@ -57,7 +57,7 @@ public class UploadDataService {
 
     public int saveNewTimeStamp(String rut, String date, String time) {
         TimestampEntity timestampEntityToBeUpload = new TimestampEntity();
-        timestampEntityToBeUpload.setId_staff(getStaffByRut(rareSubstring(rut)).getId_staff());
+        timestampEntityToBeUpload.setIdStaff(getStaffByRut(rareSubstring(rut)).getIdStaff());
 
         Date parsedDate = parseDate(rareSubstring(date));
         if(parsedDate == null){
@@ -75,11 +75,11 @@ public class UploadDataService {
         return 0;
     }
 
-    public ArrayList<String> splitData(String data){
+    public List<String> splitData(String data){
 
         String[] splitByNewLine = data.split("\n");
 
-        ArrayList<String> splitByDotCom = new ArrayList<>();
+        List<String> splitByDotCom = new ArrayList<>();
         for (String dato : splitByNewLine){
 
             if(dato.length() > 10){
@@ -95,7 +95,7 @@ public class UploadDataService {
 
     public int uploadTimestamps(MultipartFile file) {
         String data = readMultipartFile(file)+" ";
-        ArrayList<String> dataSplitted = splitData(data);
+        List<String> dataSplitted = splitData(data);
         for(int i = 0; i < dataSplitted.size(); i = 3 + i) {
             if(saveNewTimeStamp(dataSplitted.get(i+2),dataSplitted.get(i),dataSplitted.get(i+1)) == -1){
                 return (i/3)+1;
@@ -105,12 +105,10 @@ public class UploadDataService {
     }
 
     public String readMultipartFile(MultipartFile file){
-        String data = new String();
         try{
-            data = new String(file.getBytes());
+            return new String(file.getBytes());
         }catch (IOException e){
-            System.out.println(e);
         }
-        return data;
+        return "";
     }
 }

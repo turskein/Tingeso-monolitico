@@ -1,4 +1,4 @@
-package backend.services.salary.Discounts;
+package backend.services.salary.discounts;
 
 import org.springframework.stereotype.Service;
 
