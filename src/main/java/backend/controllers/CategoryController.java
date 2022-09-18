@@ -13,9 +13,4 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/asasd")
-    public String main(Model model) {
-        model.addAttribute("categorias",categoryService.obtenerCategorias());
-        return "uploadDataView";
-    }
 }

@@ -11,11 +11,15 @@ import java.util.Optional;
 
 @Service
 public class CategoryService {
-
-    @Autowired
-    CategoryRepository categoryRepository;
-
-    public ArrayList<CategoryEntity> obtenerCategorias(){
-        return (ArrayList<CategoryEntity>) categoryRepository.findAll();
+    public boolean isCategoryA(CategoryEntity category){
+        return category.getCategory().equals("A");
     }
+    public boolean isCategoryB(CategoryEntity category){
+        return category.getCategory().equals("B");
+    }
+
+    public boolean isCategoryC(CategoryEntity category){
+        return category.getCategory().equals("C");
+    }
+
 }

@@ -2,8 +2,7 @@ package backend.services;
 
 
 import backend.entities.ExtraHoursEntity;
-import backend.entities.JustificationEntity;
-import backend.repositories.ExtraHoursRepositoty;
+import backend.repositories.ExtraHoursRepository;
 import backend.repositories.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ public class UploadExtraHoursService {
     StaffRepository staffRepository;
 
     @Autowired
-    ExtraHoursRepositoty extraHoursRepositoty;
+    ExtraHoursRepository extraHoursRepository;
 
     private Long getIdByRut(String rut){
         try {
@@ -27,7 +26,7 @@ public class UploadExtraHoursService {
 
     private void saveJustification(Long id, ExtraHoursEntity extraHoursEntity){
         extraHoursEntity.setId_staff(id);
-        extraHoursRepositoty.save(extraHoursEntity);
+        extraHoursRepository.save(extraHoursEntity);
     }
 
     public int uploadExtraHours(String rut, ExtraHoursEntity extraHoursEntity){

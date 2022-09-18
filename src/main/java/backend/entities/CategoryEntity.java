@@ -1,8 +1,6 @@
 package backend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,5 +16,8 @@ public class CategoryEntity {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    private Long category;
+    @Getter
+    @Setter
+    @Column(name = "category")
+    private String category;
 }
