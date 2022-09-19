@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Try</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<nav class="ps-4 navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Tingeso :D</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/upload-data">Cargar Marcaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/upload-justifive">Cargar Justificativos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/salary/sheet-salary">Plantilla de sueldos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/salary/reports">Reportes de sueldos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="container mt-3">
+  <h2>Plantilla de sueldos</h2>
+  <dvi class="row">
+    <div class="col-2 mt-3">
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Mes</label>
+        <select class="form-select" id="inputGroupSelect01">
+          <option selected value="0">Elige el mes</option>
+          <option value="1">Enero</option>
+          <option value="2">Febrero</option>
+          <option value="3">Marzo</option>
+          <option value="4">Abril</option>
+          <option value="5">Mayo</option>
+          <option value="6">Junio</option>
+          <option value="7">Julio</option>
+          <option value="8">Agosto</option>
+          <option value="9">Septiembre</option>
+          <option value="10">Octubre</option>
+          <option value="11">Noviembre</option>
+          <option value="12">Diciembre</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-2 mt-3">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Año</span>
+        <input type="number" id="anioInput" placeholder="Elige el año" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+      </div>
+    </div>
+    <button type="button" id="calcular" class=" col-1 my-3 ms-5 btn btn-sm btn-dark">Calcular</button>
+
+  </dvi>
+
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Rut</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Años de servicio</th>
+      <th scope="col">Sueldo Fijo Mensual</th>
+      <th scope="col">Bonificaciones</th>
+      <th scope="col">Descuentos</th>
+      <th scope="col">Sueldo Bruto</th>
+      <th scope="col">Dscto Previsional</th>
+      <th scope="col">Dscto Salud</th>
+      <th scope="col">Sueldo Final</th>
+    </tr>
+    </thead>
+    <tbody id="tablebody">
+    <tr>
+      <th scope="row">1</th>
+      <td>23.537.297-5</td>
+      <td>Pacheco Alex</td>
+      <td>A</td>
+      <td>22</td>
+      <td>1700000</td>
+      <td>200000</td>
+      <td>1200000</td>
+      <td>123123</td>
+      <td>50000</td>
+      <td>150000</td>
+      <td>1700000</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"
+></script>
+
+<script type="text/javascript">
+
+  let mesGroup = document.getElementById("inputGroupSelect01");
+  let anioInput = document.getElementById("anioInput");
+  document.getElementById("calcular").addEventListener("click",()=>{
+    if(mesGroup.value != 0 && anioInput.value > 1900 && anioInput.value <= 2022){
+      axios.get("http://localhost:8090/salary/get-salary/"+mesGroup.value+"/"+anioInput.value)
+              .then(response => {
+                let tableBody = document.getElementById("tablebody");
+                tableBody.innerHTML = '';
+                let information = response.data;
+                for (let i = 0; i < information.length;i ++){
+                  const row = tableBody.insertRow();
+                  row.innerHTML = `
+                        <th scope="row">${i+1}</th>
+                        <td>${information[i].rut}</td>
+                        <td>${information[i].lastname+" "+information[i].name}</td>
+                        <td>${information[i].category}</td>
+                        <td>${information[i].serviceYears}</td>
+                        <td>${information[i].fixedSalary}</td>
+                        <td>${information[i].bonificationsSalary}</td>
+                        <td>${information[i].discountsSalary}</td>
+                        <td>${information[i].rawSalary}</td>
+                        <td>${information[i].previsionalSalary}</td>
+                        <td>${information[i].healthSalary}</td>
+                        <td>${information[i].realSsalary}</td>
+                    `;
+                }
+              })
+              .catch(error =>{
+                console.log(error);
+              })
+    }
+  })
+</script>

@@ -14,7 +14,6 @@ public class LimitsMonth {
         try{
             return formatter.parse(year+"-"+month+"-"+1);
         }catch(ParseException e){
-            System.out.println(e);
             return null;
         }
     }
@@ -26,7 +25,6 @@ public class LimitsMonth {
             }
             return formatter.parse(year+"-"+(month+1)+"-"+1);
         }catch (ParseException e){
-            System.out.println(e);
             return null;
         }
     }

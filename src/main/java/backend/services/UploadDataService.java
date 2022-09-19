@@ -28,11 +28,11 @@ public class UploadDataService {
     @Autowired
     TimeStampRepository timeStampRepository;
 
-    public StaffEntity getStaffByRut(String rut){
+    private StaffEntity getStaffByRut(String rut){
         return staffRepository.findByRut(rut).get(0);
     }
 
-    public Date parseDate(String str){
+    private Date parseDate(String str){
 
         try{
             return simpleDateFormatForDate.parse(str);
@@ -41,7 +41,7 @@ public class UploadDataService {
         }
     }
 
-    public Time parseTime(String str){
+    private Time parseTime(String str){
         try{
             Long ms = simpleDateFormatForTime.parse(str).getTime();
             return new Time(ms);
@@ -51,21 +51,21 @@ public class UploadDataService {
         }
     }
 
-    public String rareSubstring(String str){
+    private String rareSubstring(String str){
         return str.substring(0,str.length()-1);
     }
 
-    public int saveNewTimeStamp(String rut, String date, String time) {
+    private int saveNewTimeStamp(String rut, String date, String time) {
         TimestampEntity timestampEntityToBeUpload = new TimestampEntity();
         timestampEntityToBeUpload.setIdStaff(getStaffByRut(rareSubstring(rut)).getIdStaff());
 
-        Date parsedDate = parseDate(rareSubstring(date));
+        Date parsedDate = parseDate(date);
         if(parsedDate == null){
             return -1;
         }
 
         timestampEntityToBeUpload.setDate(parsedDate);
-        Time parsedTime = parseTime(rareSubstring(time));
+        Time parsedTime = parseTime(time);
         if(parsedTime == null){
             return -1;
         }
@@ -75,11 +75,11 @@ public class UploadDataService {
         return 0;
     }
 
-    public List<String> splitData(String data){
+    private ArrayList<String> splitData(String data){
 
         String[] splitByNewLine = data.split("\n");
 
-        List<String> splitByDotCom = new ArrayList<>();
+        ArrayList<String> splitByDotCom = new ArrayList<>();
         for (String dato : splitByNewLine){
 
             if(dato.length() > 10){
@@ -88,14 +88,17 @@ public class UploadDataService {
                 splitByDotCom.add(splitted[1]);
                 splitByDotCom.add(splitted[2]);
             }
-
         }
         return splitByDotCom;
     }
 
     public int uploadTimestamps(MultipartFile file) {
         String data = readMultipartFile(file)+" ";
-        List<String> dataSplitted = splitData(data);
+        return uploadTimeStamps(data);
+    }
+
+    public int uploadTimeStamps(String allData){
+        ArrayList<String> dataSplitted = splitData(allData);
         for(int i = 0; i < dataSplitted.size(); i = 3 + i) {
             if(saveNewTimeStamp(dataSplitted.get(i+2),dataSplitted.get(i),dataSplitted.get(i+1)) == -1){
                 return (i/3)+1;

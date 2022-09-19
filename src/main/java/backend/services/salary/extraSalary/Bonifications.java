@@ -11,22 +11,14 @@ import java.util.Date;
 @Service
 public class Bonifications {
     double [] percentages = {0.05, 0.08, 0.11, 0.14, 0.17};
-    int    [] extraYears   = {5,10,15,20,25};
+    int    [] extraYears   = {5, 10, 15, 20, 25};
 
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar start = Calendar.getInstance();
 
-    private Date newDate (Date oldDate, int years){
-        int oldYear = oldDate.getYear();
-        int oldMonth = oldDate.getMonth();
-        int oldDay = oldDate.getDay();
+    private Date addOneYear (){
+        start.add(Calendar.DATE, 365);
+        return start.getTime();
 
-        try {
-            Date newDate = formatter.parse((oldYear+years)+"-"+oldMonth+"-"+oldDay);
-            return newDate;
-        }catch (ParseException e){
-            System.out.println(e);
-        }
-        return null;
     }
 
     private Date getCurrentDate(){
@@ -34,14 +26,29 @@ public class Bonifications {
         return calendar.getTime();
     }
 
-
-    int    sizeExtras = 5;
-    public double bonifications(StaffEntity worker){
+    public int serviceYears(StaffEntity worker){
         Date ingress = worker.getIngress();
+        start.setTime(ingress);
+
+        Date addedOneyear = addOneYear();
 
         Date currentDate = getCurrentDate();
+        int yearOfService = 0;
+        while(currentDate.after(addedOneyear) && yearOfService < 200){
+            yearOfService ++;
+            addedOneyear = addOneYear();
+        }
+        return yearOfService;
+
+    }
+
+
+    int    sizeExtras = 5;
+    public double bonificationsPercentage(StaffEntity worker){
+        int yearsOfService = serviceYears(worker);
+
         for (int i = sizeExtras-1; i >= 0; i--) {
-            if(currentDate.before(newDate(ingress,extraYears[i]))){
+            if(yearsOfService >= extraYears[i]){
                 return percentages[i];
             }
         }
@@ -49,7 +56,7 @@ public class Bonifications {
     }
 
     public int getBonifications(int salary, StaffEntity worker){
-        return (int)(((double)salary)*bonifications(worker));
+        return (int)(((double)salary)*bonificationsPercentage(worker));
     }
 
 }

@@ -2,5 +2,5 @@ projectKey=MueblesSantiago
 serverUrl=http://localhost:9000
 serverVersion=9.6.1.59531
 dashboardUrl=http://localhost:9000/dashboard?id=MueblesSantiago
-ceTaskId=AYNPBD1kgDpqD5mEGSow
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYNPBD1kgDpqD5mEGSow
+ceTaskId=AYNTl5mt_X3haR8mkj-a
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYNTl5mt_X3haR8mkj-a

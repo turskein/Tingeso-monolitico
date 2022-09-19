@@ -42,14 +42,19 @@ public class GetSalaryByOneStaff {
         return 0;
     }
 
+    public int getFixedSalary(CategoryEntity category){
+        return salaryByCategory.getSalaryByCategory(category);
+    }
+
     public int getRawSalary(StaffEntity worker, int month, int year){
         CategoryEntity category = getCategory(worker);
-        int salaryForWorker = salaryByCategory.getSalaryByCategory(category);
+        int salaryForWorker = getFixedSalary(category);
         int discounts = applyDscts.applyDiscount(salaryForWorker,worker,month,year);
         int salaryBonifications = bonifications.getBonifications(salaryForWorker,worker);
         int salaryForExtraHours = extraHours.salaryExtraHours(worker,category,month,year);
 
-        return salaryForWorker+salaryBonifications+salaryForExtraHours-discounts;
+        int rawSalary = salaryForWorker+salaryBonifications+salaryForExtraHours-discounts;
+        return positiveSalary(rawSalary);
     }
     public int getRealSalary(StaffEntity worker, int month, int year){
         int rawSalary = getRawSalary(worker, month, year);

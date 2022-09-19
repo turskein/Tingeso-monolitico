@@ -25,8 +25,8 @@ public class UploadDataController {
     public ModelAndView uploadTimestamps(@RequestParam("file") MultipartFile file){
         int response = uploadDataService.uploadTimestamps(file);
         if(response == 0){
-            return new ModelAndView("redirect:");
+            return new ModelAndView("redirect:/");
         }
-        return new ModelAndView("redirect:/uploaddata");
+        return new ModelAndView("redirect:/upload-data");
     }
 }

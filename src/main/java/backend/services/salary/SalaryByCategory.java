@@ -18,12 +18,11 @@ public class SalaryByCategory {
     int salaryForA = 1700000;
     int salaryForB = 1200000;
     int salaryForC = 800000;
-
     int extraHourSalCatA = 25000;
     int extraHourSalCatB = 20000;
     int extraHourSalCatC = 10000;
 
-    int getSalaryByCategory(CategoryEntity category){
+    public int getSalaryByCategory(CategoryEntity category){
         if(categoryService.isCategoryA(category)){
             return salaryForA;
         }

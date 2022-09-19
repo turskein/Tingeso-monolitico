@@ -10,4 +10,5 @@ import java.util.List;
 public interface CategoryRepository extends CrudRepository<CategoryEntity, Long>{
 
     public List<CategoryEntity> findAllById(Long id);
+    public List<CategoryEntity> findByCategory(String category);
 }

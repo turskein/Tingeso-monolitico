@@ -16,7 +16,7 @@ public class TimestampEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false,name = "id_timestamp")
+    @Column(name = "id_timestamp", unique = true, nullable = false)
     @Getter
     private Long idTimestamp;
 

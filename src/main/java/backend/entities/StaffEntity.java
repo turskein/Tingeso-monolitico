@@ -15,7 +15,7 @@ public class StaffEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false,name = "id_staff")
+    @Column(name = "id_staff", unique = true, nullable = false)
     @Getter
     private Long idStaff;
 
