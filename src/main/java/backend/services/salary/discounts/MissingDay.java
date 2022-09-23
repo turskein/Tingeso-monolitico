@@ -23,7 +23,7 @@ public class MissingDay {
 
     SimpleDateFormat formatter = new SimpleDateFormat("EEEE", Locale.ENGLISH);
 
-    String[] WorksDay = {"Monday", "Tuesday" ,"Thursday", "Wednesday", "Friday", "Saturday", "Sunday"};
+    String[] WorksDay = {"Monday", "Tuesday" ,"Thursday", "Wednesday", "Friday"};
 
     double noWorkedDay = 0.15;
 

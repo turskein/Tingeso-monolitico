@@ -43,7 +43,7 @@
             <button type="button" class="btn btn-warning my-0" id="btnAlert">Close</button>
         </div>
     </div>
-    <form class="mt-2" action="#" th:action="@{/uploadtimestamps}" method="post" enctype="multipart/form-data">
+    <form class="mt-2" action="#" th:action="@{/upload-timestamps}" method="post" enctype="multipart/form-data">
         <label for="file" class="form-label">Importar marcas</label>
         <input class="form-control" type="file" id="file" name="file" onchange="loadFile(this.files[0])">
 

@@ -34,7 +34,7 @@
 
 <div class="container">
 <!--  alert de success-->
-  <div class="mt-2 alert alert-success row justify-content-between" role="alert" id="alert-success" th:if="${rejected} == '1'">
+  <div class="mt-2 alert alert-success row justify-content-between" role="alert" id="alert-success" th:if="${rejected} == '1'" >
     <div class="mt-2 col">
       <p style="display: inline;">El justificativo se ingreso correctamente :D </p>
     </div>
@@ -64,17 +64,18 @@
   <!--Justificativo de atraso-->
   <div id="div-justificativo-falta" class="px-5" hidden>
     <h3>Justificativo de atraso</h3>
-    <form action="#" th:action="@{/upload-justifive/0}" method="post" th:name="form"></form>
+    <form action="">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Rut</label>
-        <input name="rut" placeholder="Ingrese el rut del empleado" type="text" class="form-control" id="rut-retrasos" aria-describedby="emailHelp">
+        <input placeholder="Ingrese el rut del empleado" type="text" class="form-control" id="rut-retrasos" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Fecha</label>
-        <input type="date" name="date" class="form-control" id="date-retrasos">
+        <input type="date" class="form-control" id="date-retrasos">
         <div id="date-retrasos" class="form-text">Ingrese la fecha del día de atraso</div>
       </div>
       <button id="button-retrasos" class="btn btn-primary">Crear</button>
+    </form>
   </div>
 
   <!--Justificativo de Horas extras-->
@@ -122,54 +123,6 @@
       document.getElementById("div-justificativo-falta").removeAttribute("hidden");
       document.getElementById("div-justificativo-horas-extras").setAttribute("hidden",true);
     }
-
-    document.getElementById("button-horas-extras").addEventListener("click",()=>{
-      let rutValue = document.getElementById("rut-horas-extras").value;
-      let dateValue = document.getElementById("date-horas-extras").value;
-      let amountValue = document.getElementById("amount-horas-extras").value;
-      axios.post("http://localhost:8090/"+"1/"+rutValue,
-              {
-                "date" : dateValue,
-                "amount" : amountValue
-              }
-      ).then(response => {
-        if(response.data == 1){
-          document.getElementById("alert").removeAttribute("hidden");
-          document.getElementById("alert-success").setAttribute("hidden",true);
-        }else{
-          document.getElementById("alert-success").removeAttribute("hidden");
-          document.getElementById("alert").setAttribute("hidden",true);
-          document.getElementById("rut-horas-extras").value = "";
-          document.getElementById("date-horas-extras").value = "";
-          document.getElementById("amount-horas-extras").value = "";
-        }
-      }).catch(error => {
-        document.getElementById("alert").removeAttribute("hidden");
-      })
-    })
-
-    document.getElementById("button-retrasos").addEventListener("click",()=>{
-      let rutValue = document.getElementById("rut-retrasos").value;
-      let dateValue = document.getElementById("date-retrasos").value;
-      axios.post("http://localhost:8090/"+"0/"+rutValue,
-              {
-                "date" : dateValue,
-              }
-      ).then(response => {
-        console.log("Se ejecuto correctamente");
-        if(response.data == 1){
-          document.getElementById("alert").removeAttribute("hidden");
-          document.getElementById("alert-success").setAttribute("hidden",true);
-        }else{
-          document.getElementById("alert-success").removeAttribute("hidden");
-          document.getElementById("alert").setAttribute("hidden",true);
-          document.getElementById("rut-retrasos").value = "";
-          document.getElementById("date-retrasos").value = "";
-        }
-      }).catch(error => {
-        document.getElementById("alert").removeAttribute("hidden");
-      })
-    })
   })
 
   document.getElementById("btnAlert").addEventListener("click",() =>{

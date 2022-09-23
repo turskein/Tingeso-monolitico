@@ -7,7 +7,7 @@ import backend.entities.StaffEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.util.Date;
 
 @Service
 public class UploadJustifiveService {
@@ -37,7 +37,9 @@ public class UploadJustifiveService {
 
     }
 
-    public int uploadJustifive(String rut, JustificationEntity justificationEntity){
+    public int uploadJustifive(String rut, Date date){
+        JustificationEntity justificationEntity = new JustificationEntity();
+        justificationEntity.setDate(date);
         Long idStaff = getIdByRut(rut);
         if(idStaff == Integer.toUnsignedLong(0)){
             return 1;

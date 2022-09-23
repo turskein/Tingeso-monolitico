@@ -28,10 +28,9 @@ public class TestExtraHoursService {
         ExtraHoursEntity newExtraHours = new ExtraHoursEntity();
         try{
             Date theDate = simpleDateFormatForDate.parse("2022/09/18");
-            newExtraHours.setDate(theDate);
-            newExtraHours.setAmount(2);
-            uploadExtraHoursService.uploadExtraHours("23.537.297-5", newExtraHours);
-            uploadExtraHoursService.uploadExtraHours("asdasdasd", newExtraHours);
+            int amount = 2;
+            uploadExtraHoursService.uploadExtraHours("23.537.297-5", theDate, amount);
+            uploadExtraHoursService.uploadExtraHours("asdasdasd", theDate, amount);
         }catch (ParseException e){
         }
 

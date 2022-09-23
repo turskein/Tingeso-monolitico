@@ -28,8 +28,7 @@ public class TestJustificativeService {
         JustificationEntity newJustification = new JustificationEntity();
         try{
             Date theDate = simpleDateFormatForDate.parse("2022/09/18");
-            newJustification.setDate(theDate);
-            uploadJustifiveService.uploadJustifive("23.537.297-5", newJustification);
+            uploadJustifiveService.uploadJustifive("23.537.297-5", theDate);
         }catch (ParseException e){
         }
     }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 
 @Controller
-@RequestMapping
+@RequestMapping()
 public class UploadDataController {
     @Autowired
     UploadDataService uploadDataService;
@@ -20,8 +20,7 @@ public class UploadDataController {
         return "uploadDataView";
     }
 
-    @PostMapping("/uploadtimestamps")
-    @ResponseBody
+    @PostMapping("/upload-timestamps")
     public ModelAndView uploadTimestamps(@RequestParam("file") MultipartFile file){
         int response = uploadDataService.uploadTimestamps(file);
         if(response == 0){

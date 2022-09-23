@@ -100,9 +100,13 @@ public class UploadDataService {
     public int uploadTimeStamps(String allData){
         ArrayList<String> dataSplitted = splitData(allData);
         for(int i = 0; i < dataSplitted.size(); i = 3 + i) {
-            if(saveNewTimeStamp(dataSplitted.get(i+2),dataSplitted.get(i),dataSplitted.get(i+1)) == -1){
-                return (i/3)+1;
-            }
+           try{
+               if(saveNewTimeStamp(dataSplitted.get(i+2),dataSplitted.get(i),dataSplitted.get(i+1)) == -1){
+                   return i+1;
+               }
+           }catch (Exception e){
+               return 1;
+           }
         }
         return 0;
     }

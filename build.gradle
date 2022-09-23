@@ -17,6 +17,10 @@ jacocoTestReport {
 sonarqube {
     properties {
         property 'sonar.host.url', 'http://localhost:9000'
+        property "sonar.exclusions", 'src/main/java/backend/controllers/*.java'
+        property "sonar.exclusions", 'src/main/java/backend/entities/*.java'
+        property "sonar.exclusions", 'src/main/java/backend/repositories/*.java'
+        property "sonar.exclusions", 'src/test/*.java'
     }
 }
 

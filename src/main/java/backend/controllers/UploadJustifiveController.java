@@ -1,16 +1,22 @@
 package backend.controllers;
 
 import backend.services.UploadExtraHoursService;
+
+import java.sql.Date;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import backend.entities.ExtraHoursEntity;
 import backend.entities.JustificationEntity;
 import backend.services.UploadJustifiveService;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping
+@RequestMapping("/upload-justifive")
 public class UploadJustifiveController {
 
     @Autowired
@@ -19,9 +25,9 @@ public class UploadJustifiveController {
     @Autowired
     UploadExtraHoursService uploadExtraHoursService;
 
-    @GetMapping("/upload-justifive")
+    @GetMapping
     public String uploadView() {
-        return "uploadJustifiveView";
+        return "uploadJustifiveView-copy";
     }
 
     @GetMapping("/problems-with-justifive")
@@ -30,25 +36,23 @@ public class UploadJustifiveController {
     }
 
 
-    @PostMapping("/0/{rut}")
-    @ResponseBody
-    public String uploadJustifyBackwardness(@PathVariable("rut") String rut,
-                                         @RequestBody JustificationEntity justificationEntity){
-        if(uploadJustifiveService.uploadJustifive(rut,justificationEntity) == 1){
-            return "1";
-        }
-        return "0";
+    @PostMapping("/0")
+    public String uploadJustifyBackwardness(@RequestParam(value="rut") String rut,
+                                         @RequestParam(value="date") Date date,
+                                         Model model){
+    uploadJustifiveService.uploadJustifive(rut,date);
+        
+        return "redirect:/upload-justifive";
     }
 
-    @PostMapping("/1/{rut}")
-    @ResponseBody
-    public String uploadJustifyExtraHours(@PathVariable("rut") String rut,
-                                       @RequestBody ExtraHoursEntity extraHoursEntity){
+    @PostMapping("/1")
+    public String uploadJustifyExtraHours(@RequestParam(value="rut") String rut,
+                                        @RequestParam(value="date") Date date,
+                                        @RequestParam(value = "amount") int amount,
+                                        Model model){
 
-        if(uploadExtraHoursService.uploadExtraHours(rut,extraHoursEntity) == 1){
-            return "1";
-        }
-        return "0";
+    uploadExtraHoursService.uploadExtraHours(rut,date,amount);
+
+        return "redirect:/upload-justifive";
     }
-
 }

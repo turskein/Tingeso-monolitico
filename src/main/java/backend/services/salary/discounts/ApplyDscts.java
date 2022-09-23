@@ -29,8 +29,6 @@ public class ApplyDscts {
 
     @Autowired
     JustificationRepository justificationRepository;
-
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     private double accumulatedDsctsToSalary(StaffEntity worker, int month, int year){
         Calendar start = Calendar.getInstance();
         start.setTime(limitsMonth.getStartDate(month,year));

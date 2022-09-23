@@ -60,7 +60,7 @@ public class GetSalaryByOneStaff {
         int rawSalary = getRawSalary(worker, month, year);
         int cotizationsDiscounts = cotizations.getPrevisionalSalary(rawSalary);
         cotizationsDiscounts = cotizationsDiscounts + cotizations.getPrevisionalSalud(rawSalary);
-        return positiveSalary(rawSalary - cotizationsDiscounts - cotizationsDiscounts);
+        return positiveSalary(rawSalary - cotizationsDiscounts);
     }
 
 }

@@ -4,6 +4,9 @@ package backend.services;
 import backend.entities.ExtraHoursEntity;
 import backend.repositories.ExtraHoursRepository;
 import backend.repositories.StaffRepository;
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +31,10 @@ public class UploadExtraHoursService {
         extraHoursRepository.save(extraHoursEntity);
     }
 
-    public int uploadExtraHours(String rut, ExtraHoursEntity extraHoursEntity){
+    public int uploadExtraHours(String rut, Date date, int amount){
+        ExtraHoursEntity extraHoursEntity = new ExtraHoursEntity();
+        extraHoursEntity.setAmount(amount);
+        extraHoursEntity.setDate(date);
         Long idStaff = getIdByRut(rut);
         if(idStaff == Integer.toUnsignedLong(0)){
             return 1;
