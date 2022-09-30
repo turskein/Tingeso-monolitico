@@ -4,6 +4,7 @@ import backend.entities.JustificationEntity;
 import backend.repositories.JustificationRepository;
 import backend.repositories.StaffRepository;
 import backend.entities.StaffEntity;
+import lombok.Generated;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +19,7 @@ public class UploadJustifiveService {
     @Autowired
     private StaffRepository staffRepository;
 
+    @Generated
     private Long getIdByRut(String rut){
         try {
             return staffRepository.findByRut(rut).get(0).getIdStaff();
@@ -26,6 +28,7 @@ public class UploadJustifiveService {
         }
     }
 
+    @Generated
     private int saveJustification(Long id, JustificationEntity justificationEntity){
         justificationEntity.setIdStaff(id);
         try{

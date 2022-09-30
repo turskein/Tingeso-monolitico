@@ -20,6 +20,7 @@ public class TestUploadDataService {
 
     @Test
     void uploadData(){
+        timeStampRepository.deleteAll();
         String allInfo = new String();
         try (BufferedReader reader = new BufferedReader(new FileReader(
                 "src/test/resources/timestamps.txt"))){
@@ -33,6 +34,6 @@ public class TestUploadDataService {
         }
 
         assertEquals(0,uploadDataService.uploadTimeStamps(allInfo),0.0);
-        timeStampRepository.deleteAll();
+
     }
 }

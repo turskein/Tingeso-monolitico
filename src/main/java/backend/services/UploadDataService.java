@@ -1,5 +1,6 @@
 package backend.services;
 
+import lombok.Generated;
 import org.springframework.stereotype.Service;
 import backend.entities.StaffEntity;
 import backend.entities.TimestampEntity;
@@ -32,6 +33,7 @@ public class UploadDataService {
         return staffRepository.findByRut(rut).get(0);
     }
 
+    @Generated
     private Date parseDate(String str){
 
         try{
@@ -41,6 +43,7 @@ public class UploadDataService {
         }
     }
 
+    @Generated
     private Time parseTime(String str){
         try{
             Long ms = simpleDateFormatForTime.parse(str).getTime();
@@ -75,6 +78,7 @@ public class UploadDataService {
         return 0;
     }
 
+    @Generated
     private ArrayList<String> splitData(String data){
 
         String[] splitByNewLine = data.split("\n");
@@ -111,6 +115,7 @@ public class UploadDataService {
         return 0;
     }
 
+    @Generated
     public String readMultipartFile(MultipartFile file){
         try{
             return new String(file.getBytes());

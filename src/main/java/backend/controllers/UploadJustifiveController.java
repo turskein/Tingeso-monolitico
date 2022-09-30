@@ -5,6 +5,7 @@ import backend.services.UploadExtraHoursService;
 import java.sql.Date;
 import java.util.Map;
 
+import lombok.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import backend.services.UploadJustifiveService;
 
 @Controller
 @RequestMapping("/upload-justifive")
+@Generated
 public class UploadJustifiveController {
 
     @Autowired

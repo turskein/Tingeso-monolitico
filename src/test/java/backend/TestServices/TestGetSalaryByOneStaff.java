@@ -43,10 +43,6 @@ public class TestGetSalaryByOneStaff {
         uploadDataService.uploadTimeStamps(allInfo);
     }
 
-    public void deleteTimestamps(){
-        timeStampRepository.deleteAll();
-    }
-
     @Test
     void testGetRealSalary(){
         uploadData();
@@ -57,7 +53,4 @@ public class TestGetSalaryByOneStaff {
         getSalaryByOneStaff.getRealSalary(workerTwo,9,2022);
         getSalaryByOneStaff.getRealSalary(workerThree,9,2022);
     }
-
-
-
 }

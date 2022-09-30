@@ -1,11 +1,13 @@
 package backend.services.salary.discounts;
 
+import lombok.Generated;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Generated
 @Service
 public class LimitsMonth {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

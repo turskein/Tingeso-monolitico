@@ -1,6 +1,7 @@
 package backend.repositories;
 
 import backend.entities.ExtraHoursEntity;
+import lombok.Generated;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@Generated
 public interface ExtraHoursRepository extends CrudRepository<ExtraHoursEntity, Long>{
 
     @Query(

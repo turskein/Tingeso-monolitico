@@ -3,6 +3,7 @@ package backend.services;
 
 import backend.entities.CategoryEntity;
 import backend.entities.Salary;
+import lombok.*;
 import backend.entities.StaffEntity;
 import backend.repositories.CategoryRepository;
 import backend.repositories.StaffRepository;
@@ -11,12 +12,12 @@ import backend.services.salary.discounts.ApplyDscts;
 import backend.services.salary.discounts.Cotizations;
 import backend.services.salary.extraSalary.Bonifications;
 import backend.services.salary.extraSalary.ExtraHours;
+import lombok.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Service
 public class GetSalaryForEveryStaff {
 
@@ -39,6 +40,7 @@ public class GetSalaryForEveryStaff {
     @Autowired
     StaffRepository staffRepository;
 
+    @Generated
     public CategoryEntity getCategory(StaffEntity worker){
         long idCategory = worker.getIdCategory();
         return categoryRepository.findAllById(idCategory).get(0);

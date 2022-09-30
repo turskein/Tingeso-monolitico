@@ -9,6 +9,7 @@ import backend.repositories.ExtraHoursRepository;
 import backend.repositories.TimeStampRepository;
 import backend.services.CategoryService;
 import backend.services.salary.SalaryByCategory;
+import lombok.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,7 @@ public class ExtraHours {
 
     }
 
+    @Generated
     public Time getTimeFromTimestamp(TimestampEntity timestamp){
         try{
             return timestamp.getTime();
@@ -62,6 +64,7 @@ public class ExtraHours {
 
     Time departureTime = new Time(16,0,0);
 
+    @Generated
     private int validateExtraHours(StaffEntity worker,ExtraHoursEntity extraHour){
         Date dateOfExtraHour = extraHour.getDate();
 

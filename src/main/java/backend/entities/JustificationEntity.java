@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Generated
 public class JustificationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

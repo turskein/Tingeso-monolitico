@@ -23,15 +23,15 @@ public class DescByDelaySalary {
     double dsctoFourtyFive = 0.06;
 
     public boolean overSeventy(TimestampEntity timestamp){
-        return seventyMinuteDelay.after(timestamp.getTime());
+        return seventyMinuteDelay.before(timestamp.getTime());
     }
 
     public double dsctoByDelay(TimestampEntity timestamp){
-        if(fourtyFiveMinuteDelay.after(timestamp.getTime())){
+        if(fourtyFiveMinuteDelay.before(timestamp.getTime())){
             return dsctoFourtyFive;
-        }else if(twentyFiveMinuteDelay.after(timestamp.getTime())){
+        }else if(twentyFiveMinuteDelay.before(timestamp.getTime())){
             return dsctoTwentyFive;
-        }else if (tenMinuteDelay.after(timestamp.getTime())) {
+        }else if (tenMinuteDelay.before(timestamp.getTime())) {
             return dsctoTen;
         }
         return 0;

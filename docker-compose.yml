@@ -2,10 +2,8 @@ version: "3.1"
 
 services:
   proyecto:
-    container_name: tingesomonolitico
-    image: 'proyecto'
-    build:
-      context: .
+    container_name: MueblesFinos
+    image: 'alexpachecolaos/tingesomonolitico'
     depends_on:
       - db
     environment:
