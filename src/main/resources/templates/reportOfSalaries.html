@@ -36,42 +36,10 @@
 
 <div class="container mt-3">
   <h2>Plantilla de sueldos</h2>
-  <dvi class="row">
-    <div class="col-2 mt-3">
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">Mes</label>
-        <select class="form-select" id="inputGroupSelect01">
-          <option selected value="0">Elige el mes</option>
-          <option value="1">Enero</option>
-          <option value="2">Febrero</option>
-          <option value="3">Marzo</option>
-          <option value="4">Abril</option>
-          <option value="5">Mayo</option>
-          <option value="6">Junio</option>
-          <option value="7">Julio</option>
-          <option value="8">Agosto</option>
-          <option value="9">Septiembre</option>
-          <option value="10">Octubre</option>
-          <option value="11">Noviembre</option>
-          <option value="12">Diciembre</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-2 mt-3">
-      <div class="input-group mb-3">
-        <span class="input-group-text">Año</span>
-        <input type="number" id="anioInput" placeholder="Elige el año" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-      </div>
-    </div>
-    <button type="button" id="calcular" class=" col-1 my-3 ms-5 btn btn-sm btn-dark">Calcular</button>
-
-  </dvi>
-
 
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Rut</th>
       <th scope="col">Nombre</th>
       <th scope="col">Categoría</th>
@@ -86,19 +54,19 @@
     </tr>
     </thead>
     <tbody id="tablebody">
-    <tr>
-      <th scope="row">1</th>
-      <td>23.537.297-5</td>
-      <td>Pacheco Alex</td>
-      <td>A</td>
-      <td>22</td>
-      <td>1700000</td>
-      <td>200000</td>
-      <td>1200000</td>
-      <td>123123</td>
-      <td>50000</td>
-      <td>150000</td>
-      <td>1700000</td>
+    <tr th:each="salary : ${salaries}"
+    >
+      <td th:text="${salary.rut}">23.537.297-5</td>
+      <td th:text="${salary.name}">Pacheco Alex</td>
+      <td th:text="${salary.lastName}">A</td>
+      <td th:text="${salary.serviceYears}">22</td>
+      <td th:text="${salary.fixedSalary}">1700000</td>
+      <td th:text="${salary.bonificationsSalary}">200000</td>
+      <td th:text="${salary.discountsSalary}">1200000</td>
+      <td th:text="${salary.rawSalary}">123123</td>
+      <td th:text="${salary.previsionalSalary}">50000</td>
+      <td th:text="${salary.healthSalary}">150000</td>
+      <td th:text="${salary.realSsalary}">1700000</td>
     </tr>
     </tbody>
   </table>

@@ -36,90 +36,23 @@
 
 <div class="container mt-3">
     <h2>Plantilla de sueldos</h2>
-    <dvi class="row">
-        <div class="col-2 mt-3">
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Mes</label>
-                <select class="form-select" id="inputGroupSelect01">
-                    <option selected value="0">Elige el mes</option>
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <option value="3">Marzo</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Mayo</option>
-                    <option value="6">Junio</option>
-                    <option value="7">Julio</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-2 mt-3">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Año</span>
-                <input type="number" id="anioInput" placeholder="Elige el año" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-            </div>
-        </div>
-        <button type="button" id="calcular" class=" col-1 my-3 ms-5 btn btn-sm btn-dark">Calcular</button>
-
-    </dvi>
-
 
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Rut</th>
             <th scope="col">Sueldo</th>
         </tr>
         </thead>
         <tbody id="tablebody">
-        <tr>
-            <th scope="row">1</th>
-            <td>12.234.567-9</td>
-            <td>12345678</td>
+        <tr
+                th:each="salary : ${salaries}"
+        >
+            <td th:text="${salary.rut}"></td>
+            <td th:text="${salary.realSsalary}"></td>
         </tr>
         </tbody>
     </table>
 </div>
 </body>
 </html>
-
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
-        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"
-></script>
-
-<script type="text/javascript">
-
-    let mesGroup = document.getElementById("inputGroupSelect01");
-    let anioInput = document.getElementById("anioInput");
-    document.getElementById("calcular").addEventListener("click",()=>{
-        if(mesGroup.value != 0 && anioInput.value > 1900 && anioInput.value <= 2022){
-            axios.get("http://localhost:8090/salary/get-salary/"+mesGroup.value+"/"+anioInput.value)
-                .then(response => {
-                    let tableBody = document.getElementById("tablebody");
-                    tableBody.innerHTML = '';
-                    let information = response.data;
-                    for (let i = 0; i < information.length;i ++){
-                        const row = tableBody.insertRow();
-                        row.innerHTML = `
-                        <th scope="row">${i+1}</th>
-                        <td>${information[i].rut}</td>
-                        <td>${information[i].realSsalary}</td>
-                    `;
-                    }
-                })
-                .catch(error =>{
-                    console.log(error);
-                })
-        }
-    })
-
-
-
-</script>
