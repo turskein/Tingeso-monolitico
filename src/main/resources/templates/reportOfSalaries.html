@@ -38,6 +38,7 @@
   <h2>Plantilla de sueldos</h2>
 
   <table class="table table-striped">
+    <caption>Tabla jaja lol</caption>
     <thead>
     <tr>
       <th scope="col">Rut</th>
@@ -79,39 +80,3 @@
         integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"
 ></script>
-
-<script type="text/javascript">
-
-  let mesGroup = document.getElementById("inputGroupSelect01");
-  let anioInput = document.getElementById("anioInput");
-  document.getElementById("calcular").addEventListener("click",()=>{
-    if(mesGroup.value != 0 && anioInput.value > 1900 && anioInput.value <= 2022){
-      axios.get("http://localhost:8090/salary/get-salary/"+mesGroup.value+"/"+anioInput.value)
-              .then(response => {
-                let tableBody = document.getElementById("tablebody");
-                tableBody.innerHTML = '';
-                let information = response.data;
-                for (let i = 0; i < information.length;i ++){
-                  const row = tableBody.insertRow();
-                  row.innerHTML = `
-                        <th scope="row">${i+1}</th>
-                        <td>${information[i].rut}</td>
-                        <td>${information[i].lastname+" "+information[i].name}</td>
-                        <td>${information[i].category}</td>
-                        <td>${information[i].serviceYears}</td>
-                        <td>${information[i].fixedSalary}</td>
-                        <td>${information[i].bonificationsSalary}</td>
-                        <td>${information[i].discountsSalary}</td>
-                        <td>${information[i].rawSalary}</td>
-                        <td>${information[i].previsionalSalary}</td>
-                        <td>${information[i].healthSalary}</td>
-                        <td>${information[i].realSsalary}</td>
-                    `;
-                }
-              })
-              .catch(error =>{
-                console.log(error);
-              })
-    }
-  })
-</script>
